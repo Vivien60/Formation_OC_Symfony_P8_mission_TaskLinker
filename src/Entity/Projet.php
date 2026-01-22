@@ -85,22 +85,22 @@ class Projet
         return $this->taches;
     }
 
-    public function addTach(Tache $tach): static
+    public function addTache(Tache $tache): static
     {
-        if (!$this->taches->contains($tach)) {
-            $this->taches->add($tach);
-            $tach->setProjet($this);
+        if (!$this->taches->contains($tache)) {
+            $this->taches->add($tache);
+            $tache->setProjet($this);
         }
 
         return $this;
     }
 
-    public function removeTach(Tache $tach): static
+    public function removeTache(Tache $tache): static
     {
-        if ($this->taches->removeElement($tach)) {
+        if ($this->taches->removeElement($tache)) {
             // set the owning side to null (unless already changed)
-            if ($tach->getProjet() === $this) {
-                $tach->setProjet(null);
+            if ($tache->getProjet() === $this) {
+                $tache->setProjet(null);
             }
         }
 

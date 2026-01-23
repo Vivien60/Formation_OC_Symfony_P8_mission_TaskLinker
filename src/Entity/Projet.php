@@ -33,12 +33,12 @@ class Projet
      * @var Collection<int, Employe>
      */
     #[ORM\ManyToMany(targetEntity: Employe::class, inversedBy: 'projets')]
-    private Collection $employe;
+    private Collection $employes;
 
     public function __construct()
     {
         $this->taches = new ArrayCollection();
-        $this->employe = new ArrayCollection();
+        $this->employes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,15 +125,15 @@ class Projet
     /**
      * @return Collection<int, Employe>
      */
-    public function getEmploye(): Collection
+    public function getEmployes(): Collection
     {
-        return $this->employe;
+        return $this->employes;
     }
 
     public function addEmploye(Employe $employe): static
     {
-        if (!$this->employe->contains($employe)) {
-            $this->employe->add($employe);
+        if (!$this->employes->contains($employe)) {
+            $this->employes->add($employe);
         }
 
         return $this;
@@ -141,7 +141,7 @@ class Projet
 
     public function removeEmploye(Employe $employe): static
     {
-        $this->employe->removeElement($employe);
+        $this->employes->removeElement($employe);
 
         return $this;
     }

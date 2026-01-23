@@ -35,10 +35,10 @@ final class EmployeFactory extends PersistentObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'adresseEmail' => self::faker()->text(255),
+            'adresseEmail' => self::faker()->email(),
             'dateEntree' => self::faker()->dateTime(),
-            'nom' => self::faker()->text(255),
-            'prenom' => self::faker()->text(255),
+            'nom' => self::faker()->lastName(),
+            'prenom' => self::faker()->firstName(),
             'typeContrat' => self::faker()->randomElement(EmployeTypeContrat::cases()),
         ];
     }

@@ -1,25 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProjetController!{% endblock %}
+{% block title %}Nom du projet - {{ projet.nom }}{% endblock %}
+
+{% block title_container %}
+    <div class="flex-header">
+        <h1>{{ projet.nom }}</h1>
+        <div class="user-list">
+            {% for employe in projet.employes %}
+                <div class="avatar">{{ employe.nom|first ~ employe.prenom|first }}</div>
+            {% endfor %}
+        </div>
+        <a class="button" href="projet-edit.html">Modifier</a>
+    </div>
+{% endblock %}
 
 {% block page_content %}
     <div id="tasks-container">
         {% for statut in statuts %}
             <div class="task-column">
                 <h2>{{ statut.libelle }}</h2>
-                {%  for tache in tachesParStatut[statut.id] %}
-                    <div class="tasks-list">
-                        <a class="task" href="tache.html">
-                            <h3>{{ tache.nom }}</h3>
-                            <p>{{ tache.description }}</p>
-                            <div class="task-infos">
-                                <div class="task-deadline">
-                                    <i class="fa-regular fa-calendar"></i> {{ tache.dateDeadline|date('d M Y') }}
+                {%  if tachesParStatut[statut.id] is defined %}
+                    {%  for tache in tachesParStatut[statut.id] %}
+                        <div class="tasks-list">
+                            <a class="task" href="tache.html">
+                                <h3>{{ tache.nom }}</h3>
+                                <p>{{ tache.description }}</p>
+                                <div class="task-infos">
+                                    <div class="task-deadline">
+                                        <i class="fa-regular fa-calendar"></i> {{ tache.dateDeadline|date('d M Y') }}
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <a href="tache-add.html" class="task-add">
                     + Ajouter une tâche
                 </a>

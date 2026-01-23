@@ -25,14 +25,14 @@ class AppFixtures extends Fixture
         $projets = ProjetFactory::createMany(10, function() {
             // 3-6 employés par projet
             return [
-                'employe' => EmployeFactory::randomRange(3, 6),
+                'employes' => EmployeFactory::randomRange(3, 6),
             ];
         });
         /**
          * @var \App\Entity\Projet $projet
          */
         array_map(fn($projet) => TacheFactory::createMany(rand(3, 8), [
-            'employe' => faker()->randomElement($projet->getEmploye()->toArray()),
+            'employe' => faker()->randomElement($projet->getEmployes()->toArray()),
             'projet' => $projet,
         ]), $projets);
 

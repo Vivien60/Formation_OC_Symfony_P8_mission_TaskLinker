@@ -34,10 +34,12 @@ final class TacheFactory extends PersistentObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'nom' => self::faker()->text(255),
+            'nom' => self::faker()->text(64),
             'projet' => ProjetFactory::random(),
             'statut' => StatutFactory::random(),
             'employe' => EmployeFactory::random(),
+            'description' => self::faker()->text(255),
+            'dateDeadLine' => self::faker()->dateTime(),
         ];
     }
 

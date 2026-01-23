@@ -85,6 +85,21 @@ class Projet
         return $this->taches;
     }
 
+    public function getTachesGroupeesParStatut(): array
+    {
+        $tachesParStatut = [];
+        foreach ($this->getTaches() as $tache) {
+            $statutId = $tache->getStatut()->getId();
+            $tachesParStatut[$statutId][] = $tache;
+        }
+        return $tachesParStatut;
+    }
+
+    public function getTachesByStatus(Statut $statut): Collection
+    {
+        return $this->taches->filter(fn (Tache $tache) => $tache->getStatut() === $statut);
+    }
+
     public function addTache(Tache $tache): static
     {
         if (!$this->taches->contains($tache)) {

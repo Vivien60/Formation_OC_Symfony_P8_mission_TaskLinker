@@ -7,7 +7,7 @@
         <h1>{{ projet.nom }}</h1>
         <div class="user-list">
             {% for employe in projet.employes %}
-                <div class="avatar">{{ employe.nom|first ~ employe.prenom|first }}</div>
+                <div class="avatar">{{ employe.prenom|first ~ employe.nom|first }}</div>
             {% endfor %}
         </div>
         <a class="button" href="projet-edit.html">Modifier</a>

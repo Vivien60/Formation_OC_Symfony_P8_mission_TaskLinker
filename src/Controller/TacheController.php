@@ -37,4 +37,21 @@ final class TacheController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/projet/{idProjet}/tache/new', name: 'app_tache_new', requirements: ['idProjet' => '\d+'], methods: ['GET', 'POST'])]
+    public function add(Request $request, Tache $tache, int $idProjet, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(TacheType::class, $tache);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($tache);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_projet_show', ['id' => $idProjet], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('tache/new.html.twig', [
+            'tache' => $tache,
+            'form' => $form,
+        ]);
+    }
 }

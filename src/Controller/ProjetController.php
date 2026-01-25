@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Projet;
 use App\Entity\Statut;
 use App\Entity\Tache;
+use App\Repository\ProjetRepository;
 use App\Repository\StatutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ProjetController extends AbstractController
 {
     #[Route('', name: 'app_projet')]
-    public function index(): Response
+    public function index(ProjetRepository $repo): Response
     {
-        return $this->render('projet/index.html.twig', [
-            'controller_name' => 'ProjetController',
+        $projets = $repo->findAll();
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController',
+            'projets' => $projets,
         ]);
     }
 

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ employe.prenom ~ ' ' ~ employe.nom }} - TaskLinker{% endblock %}
+{% block page_title %}{{ employe.prenom ~ ' ' ~ employe.nom }}{% endblock %}
+
+{% block page_content %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <br>
+    <button class="button button-submit">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}

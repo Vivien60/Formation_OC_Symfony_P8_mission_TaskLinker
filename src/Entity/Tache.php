@@ -24,15 +24,15 @@ class Tache
     private ?\DateTime $dateDeadline = null;
 
     #[ORM\ManyToOne]
-    private ?Employe $employe = null;
-
-    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Statut $statut = null;
 
     #[ORM\ManyToOne(inversedBy: 'taches')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Projet $projet = null;
+
+    #[ORM\ManyToOne(inversedBy: 'taches')]
+    private ?Employe $employe = null;
 
     public function getId(): ?int
     {
@@ -82,18 +82,6 @@ class Tache
         return $this;
     }
 
-    public function getEmploye(): ?Employe
-    {
-        return $this->employe;
-    }
-
-    public function setEmploye(?Employe $employe): static
-    {
-        $this->employe = $employe;
-
-        return $this;
-    }
-
     public function getStatut(): ?Statut
     {
         return $this->statut;
@@ -114,6 +102,25 @@ class Tache
     public function setProjet(?Projet $projet): static
     {
         $this->projet = $projet;
+
+        return $this;
+    }
+
+    public function getEmploye(): ?Employe
+    {
+        return $this->employe;
+    }
+
+    public function setEmploye(?Employe $employe): static
+    {
+        $this->employe = $employe;
+
+        return $this;
+    }
+
+    public function removeEmploye(): static
+    {
+        $this->employe = null;
 
         return $this;
     }

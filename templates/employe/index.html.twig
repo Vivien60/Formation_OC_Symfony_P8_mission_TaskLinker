@@ -31,9 +31,15 @@
                     <a class="button button-edit-team" href="{{ path('app_employe_edit', {'id' : employe.id}) }}">
                         Éditer
                     </a>
-                    <a class="delete-team" href="#">
+                    <a class="delete-team" href="#"
+                       data-controller="delete"
+                       data-action="click->delete#delete" data-target="#delete-employe-form-{{ employe.id }}-id"
+                    >
                         Supprimer
                     </a>
+                    <form class="form-delete" method="post" id="delete-employe-form-{{ employe.id }}-id" action="{{ path('app_employe_delete', {id: employe.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete-employe-' ~ employe.id) }}">
+                    </form>
                 </td>
             </tr>
         {% endfor %}

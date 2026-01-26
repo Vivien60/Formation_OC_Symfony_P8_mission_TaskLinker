@@ -455,6 +455,10 @@ form ul {
     font-style: italic;
 }
 
+.form-delete {
+    display: none;
+}
+
 a.delete-task {
     color: #E14343;
     font-size: 14px;

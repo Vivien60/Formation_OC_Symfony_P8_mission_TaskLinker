@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Employe;
 use App\Form\EmployeType;
 use App\Repository\EmployeRepository;
+use App\Service\EmployeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,13 @@ final class EmployeController extends AbstractController
         return $this->render('employe/index.html.twig', [
             'employes' => $employes
         ]);
+    }
+
+    #[Route('/{id}/delete', name: 'app_employe_delete', methods: ['POST'])]
+    public function delete(Employe $employe, EntityManagerInterface $manager, EmployeService $service): Response
+    {
+        $service->delete($employe, $manager);
+        return $this->redirectToRoute('app_employe_index');
     }
 
     #[Route('/{id}', name: 'app_employe_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]

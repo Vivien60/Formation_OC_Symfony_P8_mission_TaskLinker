@@ -52,4 +52,22 @@ final class ProjetController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    #[Route('/new', name: 'app_projet_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
+    {
+        $projet = new Projet();
+        $form = $this->createForm(ProjetType::class, $projet);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($projet);
+            $manager->flush();
+            return $this->redirectToRoute('app_projet_show', ['id' => $projet->getId()], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('projet/new.html.twig', [
+            'projet' => $projet,
+            'form' => $form,
+        ]);
+    }
 }

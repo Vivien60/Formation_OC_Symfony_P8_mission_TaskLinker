@@ -21,7 +21,7 @@ class Projet
     private ?string $nom = null;
 
     #[ORM\Column]
-    private ?bool $estArchive = null;
+    private ?bool $estArchive = false;
 
     /**
      * @var Collection<int, Tache>

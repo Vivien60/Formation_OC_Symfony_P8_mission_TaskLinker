@@ -8,6 +8,7 @@ use App\Entity\Tache;
 use App\Form\ProjetType;
 use App\Repository\ProjetRepository;
 use App\Repository\StatutRepository;
+use App\Service\ProjetService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +19,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ProjetController extends AbstractController
 {
     #[Route('', name: 'app_projet')]
-    public function index(ProjetRepository $repo): Response
+    public function index(ProjetService $service): Response
     {
-        $projets = $repo->findAll();
+        $projets = $service->getProjets();
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'projets' => $projets,

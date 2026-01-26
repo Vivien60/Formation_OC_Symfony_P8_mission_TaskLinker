@@ -16,6 +16,20 @@ class ProjetRepository extends ServiceEntityRepository
         parent::__construct($registry, Projet::class);
     }
 
+        /**
+         * @return Projet[] Returns an array of Projet objects
+         */
+        public function findProjetsActifs(): array
+        {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.estArchive = :estArchive')
+                ->setParameter('estArchive', false)
+                ->orderBy('p.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
     //    /**
     //     * @return Projet[] Returns an array of Projet objects
     //     */

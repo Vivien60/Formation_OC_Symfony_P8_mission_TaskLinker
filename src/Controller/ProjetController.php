@@ -22,8 +22,8 @@ final class ProjetController extends AbstractController
     public function index(ProjetService $service): Response
     {
         $projets = $service->getProjets();
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        return $this->render('projet/index.html.twig', [
+            'controller_name' => 'ProjetController',
             'projets' => $projets,
         ]);
     }

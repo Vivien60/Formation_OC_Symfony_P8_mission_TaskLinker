@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProjetController!{% endblock %}
+{% block title %}Liste des projets {% endblock %}
+{% block page_title %}Projets{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/html/openclassroom/Formation_OC_Symfony_P8_mission_TaskLinker/src/Controller/ProjetController.php</code></li>
-        <li>Your template at <code>/var/www/html/openclassroom/Formation_OC_Symfony_P8_mission_TaskLinker/templates/projet/index.html.twig</code></li>
-    </ul>
-</div>
+{% block page_content %}
+    <div id="projects-container">
+        {% for projet in projets %}
+            <article class="card-project">
+                <a href="{{ path('app_projet_show', {'id' : projet.id}) }}">
+                    <h2>{{ projet.nom }}</h2>
+                </a>
+                <div class="card-project-icons">
+                    <a href="{{ path('app_projet_edit', {'id' : projet.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                    <a href="#" data-controller="delete" class="delete-projet-{{ projet.id }}" data-action="click->delete#delete" data-target="#delete-projet-form-{{ projet.id }}-id"><i class="fa-solid fa-trash"></i></a>
+                </div>
+                <form class="form-delete" method="post" id="delete-projet-form-{{ projet.id }}-id" action="{{ path('app_projet_delete', {id: projet.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-projet-' ~ projet.id) }}">
+                </form>
+            </article>
+        {% endfor %}
+        <article class="card-project">
+            <a href="projet-add.html">
+                <i class="fa-solid fa-circle-plus add-project-icon"></i>
+                <h2>Ajouter un projet</h2>
+            </a>
+        </article>
+    </div>
 {% endblock %}

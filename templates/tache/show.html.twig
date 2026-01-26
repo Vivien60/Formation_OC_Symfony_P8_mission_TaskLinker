@@ -8,6 +8,10 @@
     {{ form_widget(form) }}
     <br>
     <button type="submit" class="button button-submit">Modifier</button>
-    <a href="#" class="delete-task">Supprimer la tâche</a>
     {{ form_end(form) }}
+
+    <form method="post" id="delete-task-form" action="{{ path('app_tache_delete', {id: tache.id}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete-tache-' ~ tache.id) }}">
+        <a data-controller="delete" href="#" class="delete-task" data-action="click->delete#delete" data-target="#delete-task-form">Supprimer la tâche</a>
+    </form>
 {% endblock %}

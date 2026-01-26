@@ -57,4 +57,13 @@ final class TacheController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/delete', name: 'app_tache_delete', requirements:['id' => '\d+'], methods: ['POST'])]
+    public function delete(Tache $tache, EntityManagerInterface $manager): Response
+    {
+        $idProjet = $tache->getProjet()->getId();
+        $manager->remove($tache);
+        $manager->flush();
+        return $this->redirectToRoute('app_projet_show', ['id' => $idProjet], Response::HTTP_SEE_OTHER);
+    }
 }

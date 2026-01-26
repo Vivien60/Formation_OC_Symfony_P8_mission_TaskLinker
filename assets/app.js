@@ -15,4 +15,11 @@ import './styles/app.css';
  */
 import './js/select.js';
 
+/**
+ * Turbo fait de la merde sur du chargement dynamique de sélect multiple.
+ * Je désactive
+ */
+import * as Turbo from '@hotwired/turbo'
+Turbo.session.drive = false;
+
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

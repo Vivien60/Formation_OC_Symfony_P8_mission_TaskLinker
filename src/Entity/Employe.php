@@ -141,4 +141,9 @@ class Employe
 
         return $this;
     }
+
+    public function identiteComplete(): string
+    {
+        return $this->prenom . ' ' . $this->nom;
+    }
 }

@@ -29,9 +29,7 @@ class TacheType extends AbstractType
             ->add('employe', EntityType::class, [
                 'required' => false,
                 'class' => Employe::class,
-                'choice_label' => function (Employe $employe) {
-                    return $employe->getPrenom().' '.$employe->getNom();
-                },
+                'choice_label' => 'identiteComplete',
             ])
             ->add('statut', EntityType::class, [
                 'required' => true,

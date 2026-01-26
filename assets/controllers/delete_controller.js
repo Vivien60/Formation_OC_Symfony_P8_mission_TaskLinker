@@ -16,7 +16,10 @@ export default class extends Controller {
 
     delete(event) {
         event.preventDefault();
-        const form = document.querySelector(event.target.dataset.target);
+        const form = document.querySelector(this.element.dataset.target);
+        console.log(event);
+        console.log(this.element.dataset.target);
+        console.log(form);
         form.submit();
     }
 }

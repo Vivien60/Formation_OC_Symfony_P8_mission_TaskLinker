@@ -54,6 +54,14 @@ final class ProjetController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/delete', name: 'app_projet_delete', methods: ['POST'])]
+    public function delete(Projet $projet, EntityManagerInterface $manager): Response
+    {
+        $projet->setEstArchive(true);
+        $manager->persist($projet);
+        $manager->flush();
+        return $this->redirectToRoute('app_projet');
+    }
 
     #[Route('/new', name: 'app_projet_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response

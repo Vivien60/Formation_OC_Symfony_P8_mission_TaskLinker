@@ -5,7 +5,8 @@
 
 {% block page_content %}
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.nom, {label : 'Titre du projet'}) }}
+    {{ form_row(form.employes, {label : 'Inviter des membres'}) }}
     <br>
     <button class="button button-submit">Modifier</button>
     {{ form_end(form) }}

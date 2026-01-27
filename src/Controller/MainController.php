@@ -16,7 +16,6 @@ final class MainController extends AbstractController
     {
         $projets = $service->getProjets();
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
             'projets' => $projets,
         ]);
     }

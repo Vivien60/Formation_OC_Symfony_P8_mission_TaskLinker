@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Projet;
+use App\Entity\Statut;
 use App\Entity\Tache;
 use App\Form\TacheType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,9 +41,13 @@ final class TacheController extends AbstractController
     }
 
     #[Route('/projet/{idProjet}/tache/new', name: 'app_tache_new', requirements: ['idProjet' => '\d+'], methods: ['GET', 'POST'])]
-    public function add(Request $request, ?Tache $tache, int $idProjet, EntityManagerInterface $manager): Response
+    #[Route('/projet/{idProjet}/tache/new/{idStatut}', name: 'app_tache_new_with_status',
+        requirements: ['idProjet' => '\d+', 'idStatut' => '\d+'], methods: ['GET'])
+    ]
+    public function add(Request $request, ?Tache $tache, int $idProjet, int $idStatut, EntityManagerInterface $manager): Response
     {
         $tache = new Tache();
+        $tache->setStatut($manager->getReference(Statut::class, $idStatut));
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

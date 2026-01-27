@@ -23,8 +23,8 @@ final class TacheController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_tache_show', methods: ['GET', 'POST'])]
-    public function show(Request $request, Tache $tache, EntityManagerInterface $manager): Response
+    #[Route('/{id}/edit', name: 'app_tache_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Tache $tache, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
@@ -32,9 +32,9 @@ final class TacheController extends AbstractController
             $manager->persist($tache);
             $manager->flush();
 
-            return $this->redirectToRoute('app_tache_show', ['id' => $tache->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_tache_edit', ['id' => $tache->getId()], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('tache/show.html.twig', [
+        return $this->render('tache/edit.html.twig', [
             'tache' => $tache,
             'form' => $form,
         ]);

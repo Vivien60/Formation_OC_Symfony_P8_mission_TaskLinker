@@ -5,7 +5,11 @@
 
 {% block page_content %}
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.nom, {label : 'Titre de la tâche'}) }}
+    {{ form_row(form.description, {label : 'Description'}) }}
+    {{ form_row(form.dateDeadline, {label : 'Date'}) }}
+    {{ form_row(form.statut, {label : 'Statut'}) }}
+    {{ form_row(form.employe, {label : 'Membre'}) }}
     <br>
     <button type="submit" class="button button-submit">Modifier</button>
     {{ form_end(form) }}

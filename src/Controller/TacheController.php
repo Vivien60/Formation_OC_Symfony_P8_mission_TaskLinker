@@ -42,7 +42,7 @@ final class TacheController extends AbstractController
 
     #[Route('/projet/{idProjet}/tache/new', name: 'app_tache_new', requirements: ['idProjet' => '\d+'], methods: ['GET', 'POST'])]
     #[Route('/projet/{idProjet}/tache/new/{idStatut}', name: 'app_tache_new_with_status',
-        requirements: ['idProjet' => '\d+', 'idStatut' => '\d+'], methods: ['GET'])
+        requirements: ['idProjet' => '\d+', 'idStatut' => '\d+'], methods: ['GET', 'POST'])
     ]
     public function add(Request $request, ?Tache $tache, int $idProjet, int $idStatut, EntityManagerInterface $manager): Response
     {

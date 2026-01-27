@@ -19,6 +19,7 @@ class ProjetType extends AbstractType
                 'required' => true,
             ])
             ->add('employes', EntityType::class, [
+                'required' => false,
                 'class' => Employe::class,
                 'choice_label' => 'identiteComplete',
                 'multiple' => true,

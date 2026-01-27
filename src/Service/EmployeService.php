@@ -9,19 +9,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class EmployeService
 {
 
-    public function __construct()
+    public function __construct(private EntityManagerInterface $manager)
     {
     }
 
-    public function delete(Employe $employe, EntityManagerInterface $manager): void
+    public function delete(Employe $employe): void
     {
-        $taches = $employe->getTaches();
-        $taches->map(function ($tache) use ($manager) {
-            $tache->removeEmploye();
-            $manager->persist($tache);
-        });
-        $manager->flush();
-        $manager->remove($employe);
-        $manager->flush();
+        $this->manager->remove($employe);
+        $this->manager->flush();
     }
 }

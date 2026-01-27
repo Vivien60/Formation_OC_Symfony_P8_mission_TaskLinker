@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés{% endblock %}
+{% block page_title %}Équipe{% endblock %}
+
+{% block page_content %}
+    <table id="team-container">
+        <thead>
+        <tr>
+            <th>Prénom, Nom</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>
+                    <div class="employee-infos">
+                        <div class="employee-avatar">
+                            {{ employe.prenom|first ~ employe.nom|first }}
+                        </div>
+                        <div class="employee-coords">
+                            <strong>{{ employe.prenom ~ ' ' ~ employe.nom }}</strong>
+                            <span>{{ employe.adresseEmail }}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ employe.typeContrat.value }}</td>
+                <td>
+                    <a class="button button-edit-team" href="{{ path('app_employe_edit', {'id' : employe.id}) }}">
+                        Éditer
+                    </a>
+                    <a class="delete-team" href="#"
+                       data-controller="delete"
+                       data-action="click->delete#delete" data-target="#delete-employe-form-{{ employe.id }}-id"
+                    >
+                        Supprimer
+                    </a>
+                    <form class="form-delete" method="post" id="delete-employe-form-{{ employe.id }}-id" action="{{ path('app_employe_delete', {id: employe.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete-employe-' ~ employe.id) }}">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

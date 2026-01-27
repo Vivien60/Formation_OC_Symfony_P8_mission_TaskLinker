@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une tâche{% endblock %}
+{% block page_title %}Créer une tâche{% endblock %}
+
+{% block page_content %}
+    {{ form_start(form) }}
+    {{ form_row(form.nom, {label : 'Titre de la tâche'}) }}
+    {{ form_row(form.description, {label : 'Description'}) }}
+    {{ form_row(form.dateDeadline, {label : 'Date'}) }}
+    {{ form_row(form.statut, {label : 'Statut'}) }}
+    {{ form_row(form.employe, {label : 'Membre'}) }}
+    <br>
+    <button class="button button-submit">Ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}

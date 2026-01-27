@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ tache.nom }} {% endblock %}
+{% block page_title %}{{ tache.nom }}{% endblock %}
+
+{% block page_content %}
+    {{ form_start(form) }}
+    {{ form_row(form.nom, {label : 'Titre de la tâche'}) }}
+    {{ form_row(form.description, {label : 'Description'}) }}
+    {{ form_row(form.dateDeadline, {label : 'Date'}) }}
+    {{ form_row(form.statut, {label : 'Statut'}) }}
+    {{ form_row(form.employe, {label : 'Membre'}) }}
+    <br>
+    <button type="submit" class="button button-submit">Modifier</button>
+    {{ form_end(form) }}
+
+    <form method="post" id="delete-task-form" action="{{ path('app_tache_delete', {id: tache.id}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete-tache-' ~ tache.id) }}">
+        <a data-controller="delete" href="#" class="delete-task" data-action="click->delete#delete" data-target="#delete-task-form">Supprimer la tâche</a>
+    </form>
+{% endblock %}

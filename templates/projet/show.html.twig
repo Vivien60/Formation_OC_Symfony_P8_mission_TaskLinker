@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nom du projet - {{ projet.nom }}{% endblock %}
+
+{% block title_container %}
+    <div class="flex-header">
+        <h1>{{ projet.nom }}</h1>
+        <div class="user-list">
+            {% for employe in projet.employes %}
+                <div class="avatar">{{ employe.prenom|first ~ employe.nom|first }}</div>
+            {% endfor %}
+        </div>
+        <a class="button" href="{{ path('app_projet_edit', {'id' : projet.id}) }}">Modifier</a>
+    </div>
+{% endblock %}
+
+{% block page_content %}
+    <div id="tasks-container">
+        {% for statut in statuts %}
+            <div class="task-column">
+                <h2>{{ statut.libelle }}</h2>
+                {%  if tachesParStatut[statut.id] is defined %}
+                    {%  for tache in tachesParStatut[statut.id] %}
+                        <div class="tasks-list">
+                            <a class="task" href="{{ path('app_tache_edit', {'id' : tache.id}) }}">
+                                <h3>{{ tache.nom }}</h3>
+                                <p>{{ tache.description }}</p>
+                                <div class="task-infos">
+                                    <div class="task-deadline">
+                                        <i class="fa-regular fa-calendar"></i> {{ tache.dateDeadline|date('d M Y') }}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <a href="{{ path('app_tache_new_with_status', {'idProjet' : projet.id, 'idStatut' : statut.id}) }}" class="task-add">
+                    + Ajouter une tâche
+                </a>
+            </div>
+        {%  endfor %}
+    </div>
+{% endblock %}

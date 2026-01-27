@@ -48,10 +48,10 @@ final class TacheController extends AbstractController
     {
         $tache = new Tache();
         $tache->setStatut($manager->getReference(Statut::class, $idStatut));
+        $tache->setProjet($manager->getReference(Projet::class, $idProjet));
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $tache->setProjet($manager->getReference(Projet::class, $idProjet));
             $manager->persist($tache);
             $manager->flush();
 

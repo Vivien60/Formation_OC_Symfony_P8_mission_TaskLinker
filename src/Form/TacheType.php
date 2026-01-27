@@ -16,6 +16,7 @@ class TacheType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $tache = $options['data'];
         $builder
             ->add('nom', TextType::class, [
                 'required' => true,
@@ -29,6 +30,7 @@ class TacheType extends AbstractType
             ->add('employe', EntityType::class, [
                 'required' => false,
                 'class' => Employe::class,
+                'choices' => $tache?->getProjet()->getEmployes() ?? [],
                 'choice_label' => 'identiteComplete',
             ])
             ->add('statut', EntityType::class, [

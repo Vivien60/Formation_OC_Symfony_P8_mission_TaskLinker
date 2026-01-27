@@ -22,7 +22,7 @@
                 {%  if tachesParStatut[statut.id] is defined %}
                     {%  for tache in tachesParStatut[statut.id] %}
                         <div class="tasks-list">
-                            <a class="task" href="{{ path('app_tache_show', {'id' : tache.id}) }}">
+                            <a class="task" href="{{ path('app_tache_edit', {'id' : tache.id}) }}">
                                 <h3>{{ tache.nom }}</h3>
                                 <p>{{ tache.description }}</p>
                                 <div class="task-infos">

@@ -35,13 +35,13 @@ créez votre fichier environnement (.env*)
 Des fixtures ont été créées pour générer des données aléatoires
 - `php bin/console doctrine:fixtures:load`
 
-### 3. Structure du projet
+## 3. Structure du projet
 
-## Structure du projet
+### Structure du projet
 Classique Symfony, à l'exception du dossier src/Core qui contient quelques classes utilitaires ou étendant Symfony.
 
 
-## Diagramme de classes 
+### Diagramme de classes
 ```mermaid
 ---
 config:
@@ -83,13 +83,13 @@ direction TB
     Tache "*" -- "1" Employe
 ```
 
-## Fonctionnalités
+### Fonctionnalités
 
 - Ajout et gestion de projets
 - Gestion des employés (pas de création)
 - Ajout et gestion de taches associées à/depuis un projet
 
-## Technologies utilisées
+### Technologies utilisées
 
 - **Backend** : PHP 8.4 avec Symfony 8.0.3
 - **Base de données** : MySQL

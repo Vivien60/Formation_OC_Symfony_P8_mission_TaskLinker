@@ -7,6 +7,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
+ * Permets d'associer un constraint reader à une factory de fixture, en étendant celle-ci
+ * Wrappe les méthodes du constraint reader.
+ * Pour l'utiliser, il suffit de ffaire étendre les factory de cette classe
  * @template T of object
  * @extends PersistentObjectFactory<T>
  */

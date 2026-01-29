@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\FieldMapping;
 use Doctrine\ORM\Mapping\MappingException;
 
+/**
+ * Permet de lire certaines contraintes des champs des entités métier
+ */
 class EntityConstraintReader
 {
     const string CONSTRAINT_LENGTH = 'length';

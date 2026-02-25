@@ -34,8 +34,8 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password', 'hash_property_path' => 'password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Mot de passe', 'hash_property_path' => 'password'],
+                'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank(message: 'Please enter a password'),

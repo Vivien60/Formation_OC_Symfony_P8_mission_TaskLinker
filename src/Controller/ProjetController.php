@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/projet')]
 final class ProjetController extends AbstractController
 {
+    #[Route('/index', name: 'app_projet_index')]
     #[Route('', name: 'app_projet')]
     public function index(ProjetService $service): Response
     {

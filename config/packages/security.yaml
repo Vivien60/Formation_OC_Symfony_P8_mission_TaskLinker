@@ -26,7 +26,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_auth_index
               #check_path: app_main
 
             # Activate different ways to authenticate:
@@ -40,6 +40,8 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { route: app_login|app_auth_index|app_register, roles: PUBLIC_ACCESS, requires_channel: https, }
         #- { path: ^/.+$, roles: PUBLIC_ACCESS }
+        - { route: ^app_employe , roles: ROLE_ADMIN, requires_channel: https, }
+        - { route: app_projet_edit|app_projet_new|app_projet_delete , roles: ROLE_ADMIN, requires_channel: https, }
         - { path: ^.*, roles: IS_AUTHENTICATED_FULLY, requires_channel: https, }
 
 when@test:

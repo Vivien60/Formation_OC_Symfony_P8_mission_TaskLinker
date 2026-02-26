@@ -39,12 +39,16 @@
                     </ul>
                 </nav>
                 <main>
-                    <header>
-                        <div id="current-user"></div>
+                    <header class="main-header">
                         <div id="title-page">
                             {% block title_container %}
                                 <h1>{% block page_title %}{% endblock %}</h1>
                             {% endblock %}
+                        </div>
+                        <div id="current-user">
+                            <a class="employee-avatar" href="{{ path('app_logout') }}">
+                                {{ app.user.prenom|first|upper ~ app.user.nom|first|upper }}
+                            </a>
                         </div>
                     </header>
                     <div id="content">

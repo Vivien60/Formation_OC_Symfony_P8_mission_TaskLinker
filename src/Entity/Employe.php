@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\EmployeRole;
 use App\Enum\EmployeTypeContrat;
 use App\Repository\EmployeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -205,18 +206,32 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see UserInterface
+     * @return list<string>
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $roles = $this->roles ?? [];
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
+        if(empty($roles)) {
+            $roles[] = EmployeRole::default()->name;
+        }
         return array_unique($roles);
     }
 
+    public function getRole(): EmployeRole
+    {
+        return EmployeRole::{$this->getRoles()[0]};
+    }
+
+
+    public function setRole(EmployeRole $role):static
+    {
+        $this->roles = [$role->name];
+        return $this;
+    }
+
     /**
-     * @param list<string> $roles
+     * @param list<EmployeRole> $roles
      */
     public function setRoles(array $roles): static
     {

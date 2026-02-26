@@ -42,6 +42,12 @@ main {
     flex: 1;
 }
 
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row wrap;
+}
 #logo {
     display: block;
     text-align: center;
@@ -96,6 +102,8 @@ header {
 
 div#current-user {
     height: 55px;
+    display: flex;
+    align-items: center;
 }
 
 div#title-page h1 {
@@ -366,6 +374,7 @@ table#team-container tr td {
     line-height: 24px;
     letter-spacing: 0em;
     text-align: center;
+    text-decoration: none;
     color: #fff;
     background: #1C5B50;
     border-radius: 50%;

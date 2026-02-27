@@ -37,10 +37,12 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        #autoriser l'accès à l'authentification et l'inscription à tous
         - { route: app_login|app_auth_index|app_register, roles: PUBLIC_ACCESS, requires_channel: https, }
-        #- { path: ^/.+$, roles: PUBLIC_ACCESS }
-        - { route: ^(app_employe|app_tache_new|app_tache_edit) , roles: ROLE_ADMIN, requires_channel: https, }
+        #restreindre l'édition et l'ajout de taches aux admins
+        #restreindre la consultation et la modification des employes aux admins
+        - { route: ^(app_employe|app_tache) , roles: ROLE_ADMIN, requires_channel: https, }
+        #restreindre la modification/création/suppression des projets aux admins
         - { route: app_projet_edit|app_projet_new|app_projet_delete , roles: ROLE_ADMIN, requires_channel: https, }
         - { path: ^.*, roles: IS_AUTHENTICATED_FULLY, requires_channel: https, }
 

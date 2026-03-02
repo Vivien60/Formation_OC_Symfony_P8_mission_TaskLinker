@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Employe;
 use App\Entity\Projet;
+use App\Enum\EmployeRole;
 use App\Enum\EmployeTypeContrat;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -34,6 +35,11 @@ class EmployeType extends AbstractType
             ->add('typeContrat', EnumType::class, [
                 'required' => true,
                 'class' => EmployeTypeContrat::class,
+                'choice_label' => 'getLabel',
+            ])
+            ->add('role', EnumType::class, [
+                'required' => true,
+                'class' => EmployeRole::class,
                 'choice_label' => 'getLabel',
             ])
         ;

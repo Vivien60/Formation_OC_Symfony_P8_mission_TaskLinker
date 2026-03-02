@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Employe;
 use App\Entity\Projet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,6 +25,20 @@ class ProjetRepository extends ServiceEntityRepository
             return $this->createQueryBuilder('p')
                 ->andWhere('p.estArchive = :estArchive')
                 ->setParameter('estArchive', false)
+                ->orderBy('p.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+        public function findActifsByEmploye(Employe $employe)
+        {
+            $conn = $this->getEntityManager()->getConnection();
+
+            return $this->createQueryBuilder('p')
+                ->innerJoin('p.employes', 'e')
+                ->andWhere('e = :employe')
+                ->setParameter('employe', $employe)
                 ->orderBy('p.id', 'ASC')
                 ->getQuery()
                 ->getResult()

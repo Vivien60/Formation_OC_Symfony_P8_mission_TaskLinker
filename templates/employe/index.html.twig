@@ -9,6 +9,7 @@
         <tr>
             <th>Prénom, Nom</th>
             <th>Statut</th>
+            <th>Role</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
                     </div>
                 </td>
                 <td>{{ employe.typeContrat.value }}</td>
+                <td>{{ employe.getRole().value }}</td>
                 <td>
                     <a class="button button-edit-team" href="{{ path('app_employe_edit', {'id' : employe.id}) }}">
                         Éditer

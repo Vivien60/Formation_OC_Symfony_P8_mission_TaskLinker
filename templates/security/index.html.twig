@@ -1,0 +1,18 @@
+{% extends 'sign.html.twig' %}
+{% block title %}Liste des projets {% endblock %}
+{% block page_title %}Projets{% endblock %}
+
+
+{% block page_content %}
+        <div id="title-page">
+            <h1>Bienvenue sur TaskLinker</h1>
+            <div class="intro">Commencez dès maintenant - gratuitement</div>
+        </div>
+        <div class="bloc-signup-or-signin">
+            <div>Vous avez déjà un compte ?</div>
+            <a class="button button-connect" href="{{ path('app_login') }}">Se connecter</a>
+            <div class="signup-or"><div class="signup-or__hr">&nbsp;</div><div>ou</div><div class="signup-or__hr">&nbsp;</div></div>
+            <a class="button button-signup" href="{{ path('app_register') }}">S'inscrire</a>
+        </div>
+    </div>
+{% endblock %}

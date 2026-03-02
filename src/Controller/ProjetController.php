@@ -32,9 +32,8 @@ final class ProjetController extends AbstractController
     #[Route('/{id}', name: 'app_projet_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Projet $projet, StatutRepository $repo): Response
     {
-        if(!$this->isGranted('ROLE_ADMIN')) {
-            $this->denyAccessUnlessGranted('projet.in_employes', $projet);
-        }
+        $this->denyAccessUnlessGranted('projet.in_employes', $projet);
+
         return $this->render('projet/show.html.twig', [
             'projet' => $projet,
             'tachesParStatut' => $projet->getTachesGroupeesParStatut(),

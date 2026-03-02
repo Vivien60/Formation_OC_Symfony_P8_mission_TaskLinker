@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+.body--sign {
+    background: url("../img/bg-welcome.jpg") round #edeee9;
+    color: white;
+}
+.body--sign nav {
+    background: none;
+}
+
+.body--sign #main-container {
+    background-color: var(--vert-deau);
+    max-width: 44.38rem;
+    height: auto;
+    min-height: auto;
+    margin: auto;
+    border-radius: 1.88rem;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.button-connect, .button-signup {
+    width: 14rem;
+}
+.button-connect {
+    background: var(--vert-foncé);
+    color: #FEFBFB;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 0.63rem;
+    border-radius: 0.63rem;
+}
+
+.button-signup {
+    justify-content: center;
+}
+
+.body--sign .intro {
+    margin-top : 1.5rem;
+}
+
+.body--sign #title-page {
+    text-align: center;
+}
+
+.bloc-sign {
+    display: flex;
+    gap: 2.5rem;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 2.5rem 0;
+}
+
+.bloc-signup-or-signin {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.signup-or {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.signup-or__hr {
+    width: 100%;
+    border: 1px inset #fff;
+    height: 0;
+    display: flex;
+    flex-flow: row;
+}
+
+.bloc-sign form label {
+    color: white;
+}
+
+.button--signup-submit {
+    margin-top: 2.5rem;
+}
+

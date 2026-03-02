@@ -5,7 +5,11 @@ security:
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Employe
+                property: adresseEmail
 
     firewalls:
         dev:
@@ -14,7 +18,16 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            form_login:
+              login_path: app_auth_index
+              check_path: app_login
+              enable_csrf: true
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_auth_index
+              #check_path: app_main
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -24,8 +37,14 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        #autoriser l'accès à l'authentification et l'inscription à tous
+        - { route: app_login|app_auth_index|app_register, roles: PUBLIC_ACCESS, requires_channel: https, }
+        #restreindre l'édition et l'ajout de taches aux admins
+        #restreindre la consultation et la modification des employes aux admins
+        - { route: ^(app_employe|app_tache) , roles: ROLE_ADMIN, requires_channel: https, }
+        #restreindre la modification/création/suppression des projets aux admins
+        - { route: app_projet_edit|app_projet_new|app_projet_delete , roles: ROLE_ADMIN, requires_channel: https, }
+        - { path: ^.*, roles: IS_AUTHENTICATED_FULLY, requires_channel: https, }
 
 when@test:
     security:

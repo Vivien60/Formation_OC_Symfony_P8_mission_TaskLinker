@@ -21,3 +21,4 @@
 /prototype/
 /CLAUDE.md
 /.idea/
+/src/Command/SetDefaultPasswordCommand.php

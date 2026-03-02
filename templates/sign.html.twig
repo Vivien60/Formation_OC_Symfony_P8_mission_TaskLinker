@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/sign.css') }}">
+{% endblock %}
+
+{% block body %}
+    <body class="body body--sign">
+        <nav>
+            <a href="{{ path('app_main') }}" id="logo">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo TaskLinker" />
+            </a>
+        </nav>
+        <div id="main-container">
+            <div class="bloc-sign">{% block page_content %}{% endblock %}</div>
+        </div>
+    </body>
+{% endblock %}

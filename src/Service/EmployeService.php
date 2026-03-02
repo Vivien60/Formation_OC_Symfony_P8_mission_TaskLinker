@@ -4,13 +4,15 @@ namespace App\Service;
 
 use App\Entity\Employe;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\Attribute\Route;
 
-class EmployeService
+class EmployeService extends AbstractService
 {
 
-    public function __construct(private EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $manager, Security $security)
     {
+        parent::__construct($security);
     }
 
     public function delete(Employe $employe): void

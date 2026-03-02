@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/projet')]
 final class ProjetController extends AbstractController
 {
+    #[Route('/index', name: 'app_projet_index')]
     #[Route('', name: 'app_projet')]
     public function index(ProjetService $service): Response
     {
@@ -31,6 +32,8 @@ final class ProjetController extends AbstractController
     #[Route('/{id}', name: 'app_projet_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Projet $projet, StatutRepository $repo): Response
     {
+        $this->denyAccessUnlessGranted('projet.is_member', $projet);
+
         return $this->render('projet/show.html.twig', [
             'projet' => $projet,
             'tachesParStatut' => $projet->getTachesGroupeesParStatut(),

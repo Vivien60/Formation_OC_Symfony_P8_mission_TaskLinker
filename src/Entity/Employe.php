@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
+use App\Enum\EmployeRole;
 use App\Enum\EmployeTypeContrat;
 use App\Repository\EmployeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
-class Employe
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_ADRESSE_EMAIL', fields: ['adresseEmail'])]
+#[UniqueEntity(fields: ['adresseEmail'], message: 'Il y a déjà un compte avec cette adresse email.')]
+class Employe implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,6 +25,18 @@ class Employe
 
     #[ORM\Column(length: 255)]
     private ?string $adresseEmail = null;
+
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
@@ -48,30 +66,6 @@ class Employe
     {
         $this->projets = new ArrayCollection();
         $this->taches = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function getAdresseEmail(): ?string
-    {
-        return $this->adresseEmail;
-    }
-
-    public function setAdresseEmail(string $adresseEmail): static
-    {
-        $this->adresseEmail = $adresseEmail;
-
-        return $this;
     }
 
     public function getNom(): ?string
@@ -182,5 +176,93 @@ class Employe
         }
 
         return $this;
+    }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAdresseEmail(): ?string
+    {
+        return $this->adresseEmail;
+    }
+
+    public function setAdresseEmail(string $adresseEmail): static
+    {
+        $this->adresseEmail = $adresseEmail;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->adresseEmail;
+    }
+
+    /**
+     * @see UserInterface
+     * @return list<string>
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles ?? [];
+        // guarantee every user at least has ROLE_USER
+        if(empty($roles)) {
+            $roles[] = EmployeRole::default()->name;
+        }
+        return array_unique($roles);
+    }
+
+    public function getRole(): EmployeRole
+    {
+        return EmployeRole::{$this->getRoles()[0]};
+    }
+
+
+    public function setRole(EmployeRole $role):static
+    {
+        $this->roles = [$role->name];
+        return $this;
+    }
+
+    /**
+     * @param list<EmployeRole> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
+     */
+    public function __serialize(): array
+    {
+        $data = (array) $this;
+        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+
+        return $data;
     }
 }

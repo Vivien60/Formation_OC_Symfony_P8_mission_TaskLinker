@@ -7,14 +7,14 @@ use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class ProjetInEmployesVoter extends Voter
+class ProjetMemberVoter extends Voter
 {
     public function __construct(private AccessDecisionManagerInterface $accessDecisionManager)
     {
     }
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if($attribute === 'projet.in_employes') {
+        if($attribute === 'projet.is_member') {
             return true;
         }
         return false;
@@ -26,7 +26,7 @@ class ProjetInEmployesVoter extends Voter
         TokenInterface $token,
         ?Vote $vote = null
     ): bool {
-       if($attribute === 'projet.in_employes') {
+       if($attribute === 'projet.is_member') {
            if ($this->accessDecisionManager->decide($token, ['ROLE_ADMIN'])) {
                return true;
            }
